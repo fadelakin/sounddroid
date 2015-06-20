@@ -2,9 +2,6 @@ package com.fisheradelakin.sounddroid.soundcloud;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
  * Created by Fisher on 6/20/15.
  */
