@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,19 +32,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.player_toolbar);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.songs_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mTracks = new ArrayList<>();
-        mAdapter = new TracksAdapter(mTracks);
+        mAdapter = new TracksAdapter(this, mTracks);
         recyclerView.setAdapter(mAdapter);
 
         // retrofit request
         SoundCloudService service = SoundCloud.getService();
-        service.searchSongs("dark horse", new Callback<List<Track>>() {
+        service.searchSongs("skepta", new Callback<List<Track>>() {
             @Override
             public void success(List<Track> tracks, Response response) {
                 mTracks.clear();
                 mTracks.addAll(tracks);
+                Log.d(TAG, "Track 1 avatar url is " + mTracks.get(0).getAvatarURL());
                 mAdapter.notifyDataSetChanged();
             }
 

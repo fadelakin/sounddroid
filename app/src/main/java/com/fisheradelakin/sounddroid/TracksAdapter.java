@@ -1,5 +1,6 @@
 package com.fisheradelakin.sounddroid;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fisheradelakin.sounddroid.soundcloud.Track;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder> {
 
     private List<Track> mTracks;
+    private Context mContext;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -29,6 +32,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Track track = mTracks.get(i);
         viewHolder.titleTextView.setText(track.getTitle());
+        Picasso.with(mContext).load(track.getAvatarURL()).into(viewHolder.thumbImageView);
     }
 
     @Override
@@ -38,7 +42,8 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
 
 
-    TracksAdapter(List<Track> tracks) {
+    TracksAdapter(Context context, List<Track> tracks) {
+        mContext = context;
         mTracks = tracks;
     }
 
