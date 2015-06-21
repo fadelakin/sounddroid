@@ -1,6 +1,6 @@
 # sounddroid
 
-sounddroid is an **extremely basic** soundcloud client for android. it supports listening to tracks and searching for tracks. i mainly built this to learn about connecting to rest apis.
+sounddroid is an **extremely basic** soundcloud client for android. it supports listening to tracks and searching for tracks but that's it. i built this as a small project.
 
 the default list shown contains the most recent tracks posted to soundcloud.
 
