@@ -21,14 +21,21 @@
         android:layout_width="match_parent">
 
         <ImageView
-            android:background="#FF0000"
+            android:id="@+id/selected_thumbnail"
             android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"/>
+            android:layout_height="@dimen/avatar_size"
+            android:contentDescription="@string/player_imageview_desc"/>
         <TextView
+            android:id="@+id/selected_title"
             android:paddingLeft="8dp"
-            android:text="Hello World"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/player_state"
+            android:layout_gravity="end"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:contentDescription="@string/player_state_desc"/>
 
     </android.support.v7.widget.Toolbar>
 

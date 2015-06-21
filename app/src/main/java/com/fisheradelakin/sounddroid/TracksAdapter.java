@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
     private List<Track> mTracks;
     private Context mContext;
+    private AdapterView.OnItemClickListener mOnItemClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -40,14 +42,16 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
         return mTracks.size();
     }
 
-
-
     TracksAdapter(Context context, List<Track> tracks) {
         mContext = context;
         mTracks = tracks;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView titleTextView;
         private ImageView thumbImageView;
@@ -57,6 +61,14 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.track_title);
             thumbImageView = (ImageView) v.findViewById(R.id.track_thumbnail);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(null, v, getLayoutPosition(), 0);
+            }
         }
     }
 }
