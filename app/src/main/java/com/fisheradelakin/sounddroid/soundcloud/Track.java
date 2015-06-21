@@ -38,7 +38,7 @@ public class Track {
     public String getAvatarURL() {
         String avatarURL = artworkURL;
         if(avatarURL != null) {
-            avatarURL = avatarURL.replace("large", "tiny");
+            avatarURL = avatarURL.replace("large", "badge");
         }
         return avatarURL;
     }
