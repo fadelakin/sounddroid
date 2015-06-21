@@ -52,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 toggleSongState();
             }
         });
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mPlayerStateButton.setImageResource(R.drawable.ic_play_circle);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.player_toolbar);
         mSelectedTitle = (TextView) findViewById(R.id.selected_title);
@@ -77,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
                 mSelectedTitle.setText(selectedTrack.getTitle());
                 Picasso.with(MainActivity.this).load(selectedTrack.getAvatarURL()).into(mSelectedThumbnail);
+
+                // song lifecycle
+                if(mMediaPlayer.isPlaying()) {
+                    mMediaPlayer.stop();
+                    mMediaPlayer.reset();
+                }
 
                 try {
                     mMediaPlayer.setDataSource(selectedTrack.getStreamURL()+"?client_id="+SoundCloudService.CLIENT_ID);
@@ -113,6 +125,18 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mMediaPlayer.start();
             mPlayerStateButton.setImageResource(R.drawable.ic_pause_circle);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mMediaPlayer != null) {
+            if(mMediaPlayer.isPlaying())
+                mMediaPlayer.stop();
+            
+            mMediaPlayer.release();
+            mMediaPlayer = null;
         }
     }
 
